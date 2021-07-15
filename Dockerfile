@@ -11,5 +11,5 @@ RUN apk update && \
     go build && \
     mv gofasta /usr/local/bin/gofasta && \
     cd .. && \
-    pip install --no-cache-dir 'pangolin==3.1.7' && \
+    #pip install --no-cache-dir 'pangolin==3.1.7' && \
     rm -rf gofasta-*
