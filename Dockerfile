@@ -6,6 +6,7 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 RUN apk update && \
     apk add build-base bzip2-dev gfortran git go lapack-dev libgfortran linux-headers py3-pandas py3-pip py3-scikit-learn python3-dev xz-dev && \
     pip install --no-cache-dir 'wheel' && \
+    # PuLP doesn't work (need to fix)
     pip install --no-cache-dir 'biopython' 'joblib' 'PuLP' 'pysam' 'snakemake' && \
     pip install --no-cache-dir 'git+https://github.com/cov-lineages/scorpio.git' && \
     pip install --no-cache-dir 'git+https://github.com/cov-lineages/constellations.git' && \
