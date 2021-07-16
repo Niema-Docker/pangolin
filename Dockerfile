@@ -4,9 +4,8 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 
 # install Pangolin (see: https://github.com/cov-lineages/pangolin/blob/master/environment.yml)
 RUN apk update && \
-    apk add build-base bzip2-dev gfortran git go lapack-dev libgfortran linux-headers py3-pandas py3-pip py3-scikit-learn python3-dev xz-dev && \
+    apk add blas-dev build-base bzip2-dev gfortran git go lapack-dev libgfortran linux-headers py3-pandas py3-pip py3-scikit-learn python3-dev xz-dev && \
     pip install --no-cache-dir 'wheel' && \
-    # PuLP doesn't work (need to fix)
     pip install --no-cache-dir 'biopython' 'joblib' 'PuLP' 'pysam' 'snakemake' && \
     pip install --no-cache-dir 'git+https://github.com/cov-lineages/scorpio.git' && \
     pip install --no-cache-dir 'git+https://github.com/cov-lineages/constellations.git' && \
@@ -17,7 +16,13 @@ RUN apk update && \
     go build && \
     mv gofasta /usr/local/bin/gofasta && \
     cd .. && \
+    mkdir coinbrew && \
+    cd coinbrew && \
+    wget "https://raw.githubusercontent.com/coin-or/coinbrew/master/coinbrew" && \
+    chmod a+x coinbrew && \
+    ./coinbrew fetch Cbc@master && \
+    ./coinbrew build Cbc && \
     pip install --no-cache-dir 'git+https://github.com/cov-lineages/pangolin.git@v3.1.7' && \
     # disable UShER check (for now)
     sed -i 's/,"usher"]/]#,"usher"]/g' /usr/lib/python*/site-packages/pangolin/utils/dependency_checks.py && \
-    rm -rf gofasta-*
+    rm -rf coinbrew gofasta-*
