@@ -17,4 +17,6 @@ RUN apk update && \
     mv gofasta /usr/local/bin/gofasta && \
     cd .. && \
     pip install --no-cache-dir 'git+https://github.com/cov-lineages/pangolin.git@v3.1.7' && \
+    # disable UShER check (for now)
+    sed -i 's/,"usher"]/]#,"usher"]/g' /usr/lib/python*/site-packages/pangolin/utils/dependency_checks.py && \
     rm -rf gofasta-*
