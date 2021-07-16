@@ -20,7 +20,7 @@ RUN apk update && \
     cd coinbrew && \
     wget "https://raw.githubusercontent.com/coin-or/coinbrew/master/coinbrew" && \
     chmod a+x coinbrew && \
-    ./coinbrew fetch Cbc@2.10.5 && \
+    ./coinbrew fetch Cbc@master && \
     ./coinbrew build Cbc --tests none --prefix=/usr/local && \
     cd .. && \
     rm /usr/lib/python3.8/site-packages/pulp/apis/../solverdir/cbc/linux/64/cbc && \
