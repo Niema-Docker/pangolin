@@ -20,10 +20,12 @@ RUN apk update && \
     cd coinbrew && \
     wget "https://raw.githubusercontent.com/coin-or/coinbrew/master/coinbrew" && \
     chmod a+x coinbrew && \
-    ./coinbrew fetch Cbc@master && \
-    ./coinbrew build Cbc && \
+    ./coinbrew fetch Cbc && \
+    ./coinbrew build Cbc --tests none --prefix=/usr/local && \
     cd .. && \
+    rm /usr/lib/python3.8/site-packages/pulp/apis/../solverdir/cbc/linux/64/cbc && \
+    ln -s $(which cbc) /usr/lib/python3.8/site-packages/pulp/apis/../solverdir/cbc/linux/64/cbc && \
     pip install --no-cache-dir 'git+https://github.com/cov-lineages/pangolin.git@v3.1.7' && \
     # disable UShER check (for now)
-    sed -i 's/,"usher"]/]#,"usher"]/g' /usr/lib/python*/site-packages/pangolin/utils/dependency_checks.py && \
+    sed -i 's/,"usher"]/]#,"usher"]/g' /usr/lib/python3.8/site-packages/pangolin/utils/dependency_checks.py && \
     rm -rf coinbrew gofasta-*
