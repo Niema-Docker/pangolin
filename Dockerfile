@@ -4,8 +4,13 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 
 # install Pangolin (see: https://github.com/cov-lineages/pangolin/blob/master/environment.yml)
 RUN apk update && \
-    apk add build-base bzip2-dev gfortran git go lapack-dev libgfortran linux-headers py3-pip python3-dev xz-dev && \
-    pip install --no-cache-dir 'biopython' 'joblib' 'pandas' 'PuLP' 'pysam' 'scikit-learn' 'snakemake' 'wheel' 'git+https://github.com/cov-lineages/pangoLEARN.git' 'git+https://github.com/cov-lineages/scorpio.git' 'git+https://github.com/cov-lineages/constellations.git' 'git+https://github.com/cov-lineages/pango-designation.git' && \
+    apk add build-base bzip2-dev gfortran git go lapack-dev libgfortran linux-headers py3-pandas py3-pip py3-scikit-learn python3-dev xz-dev && \
+    pip install --no-cache-dir 'wheel' && \
+    pip install --no-cache-dir 'biopython' 'joblib' 'PuLP' 'pysam' 'snakemake' && \
+    pip install --no-cache-dir 'git+https://github.com/cov-lineages/scorpio.git' && \
+    pip install --no-cache-dir 'git+https://github.com/cov-lineages/constellations.git' && \
+    pip install --no-cache-dir 'git+https://github.com/cov-lineages/pango-designation.git' && \
+    pip install --no-cache-dir 'git+https://github.com/cov-lineages/pangoLEARN.git' && \
     wget -qO- "https://github.com/cov-ert/gofasta/archive/refs/tags/v0.0.5.tar.gz" | tar -zx && \
     cd gofasta-* && \
     go build && \
